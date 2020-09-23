@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import axios from 'axios';
 
 export class ContactUs extends Component {
   constructor(props) {
@@ -57,6 +58,8 @@ export class ContactUs extends Component {
       alert("Please type a correct email");
     } else if (agreeTobeContacted === false) {
       alert("Must agree to be contacted via email to submit form");
+    } else {
+      axios.post()
     }
   }
 
