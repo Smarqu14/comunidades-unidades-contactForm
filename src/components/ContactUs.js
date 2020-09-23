@@ -18,23 +18,16 @@ export class ContactUs extends Component {
   }
 
   handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value }, () => {
-      console.log(this.state);
-    });
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleClear(e) {
-    this.setState(
-      {
-        name: "",
-        email: "",
-        birthDate: "",
-        agreeTobeContacted: false,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      name: "",
+      email: "",
+      birthDate: "",
+      agreeTobeContacted: false,
+    });
   }
   handleCheckBox(e) {
     this.setState((prevState) => ({
