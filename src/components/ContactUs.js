@@ -11,12 +11,13 @@ export class ContactUs extends Component {
       email: "",
       birthDate: "",
       agreeTobeContacted: false,
-      disable: true,
+      isButtonDisable: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheckBox = this.handleCheckBox.bind(this);
+    this.handleDisable = this.handleDisable.bind(this);
   }
 
   handleChange(e) {
@@ -35,6 +36,14 @@ export class ContactUs extends Component {
     this.setState((prevState) => ({
       agreeTobeContacted: !prevState.agreeTobeContacted,
     }));
+  }
+  handleDisable(e) {
+    const { name, email, birthDate } = this.state;
+    if (name.length > 0 && email.length > 0) {
+      this.setState((prevState) => ({
+        isButtonDisable: false,
+      }));
+    }
   }
 
   handleSubmit(e) {
@@ -125,12 +134,17 @@ export class ContactUs extends Component {
             onChange={this.handleCheckBox}
           />
           I agree to be contacted via email.
-          <Buttons
+          <Button
             type="button"
             value="clear"
             onClick={this.handleClear}
-          ></Buttons>
-          <Buttons type="submit" value="Submit" />
+          ></Button>
+          <Submit
+            type="submit"
+            value="Submit"
+            disabled={this.state.isButtonDisable}
+            primary
+          />
         </form>
       </Wrapper>
     );
@@ -145,6 +159,7 @@ const Wrapper = styled.div`
   padding: 25px;
   border: 1px solid lightgrey;
   margin: 25px;
+  width: 500px;
 `;
 
 const Input = styled.input`
@@ -157,13 +172,28 @@ const Input = styled.input`
   margin-bottom: 16px;
 `;
 
-const Buttons = styled.input`
+const Button = styled.input`
+background-color: lightblue;
+color: black;
+padding: 12px 20px;
+border: none;
+font-size: 15px;
+border-radius: 4px;
+cursor: pointer;
+margin: 10px;
+&:hover {
   background-color: blue;
   color: white;
+}
+}
+`;
+
+const Submit = styled.input`
   padding: 12px 20px;
   border: none;
-  font-size: 20px;
+  font-size: 15px;
+  color: black;
   border-radius: 4px;
   cursor: pointer;
-  margin: 10px;
+  background-color: ${(props) => (props.primary ? "lightgrey" : "lightblue")};
 `;
