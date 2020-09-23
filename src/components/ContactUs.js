@@ -84,7 +84,7 @@ export class ContactUs extends Component {
           }
         )
         .then((res) => {
-          res.status(200);
+          console.log(res);
         })
         .catch((err) => {
           if (err) {
@@ -139,12 +139,7 @@ export class ContactUs extends Component {
             value="clear"
             onClick={this.handleClear}
           ></Button>
-          <Submit
-            type="submit"
-            value="Submit"
-            disabled={this.state.isButtonDisable}
-            primary
-          />
+          <Submit type="submit" value="Submit" disabled={!email} primary />
         </form>
       </Wrapper>
     );
@@ -189,11 +184,11 @@ margin: 10px;
 `;
 
 const Submit = styled.input`
+  background-color: lightblue;
   padding: 12px 20px;
   border: none;
   font-size: 15px;
   color: black;
   border-radius: 4px;
   cursor: pointer;
-  background-color: ${(props) => (props.primary ? "lightgrey" : "lightblue")};
 `;
