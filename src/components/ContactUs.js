@@ -47,6 +47,14 @@ export class ContactUs extends Component {
     const { name, email, birthDate, agreeTobeContacted } = this.state;
     const letters = /^[a-zA-Z ]+$/;
     const validEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    today = yyyy + "-" + mm + "-" + dd;
+
+    const birth = Date.parse(birthDate);
+    const todayDate = Date.parse(today);
 
     if (name.length === 0) {
       alert("Please type your name");
@@ -58,6 +66,8 @@ export class ContactUs extends Component {
       alert("Please type a correct email");
     } else if (agreeTobeContacted === false) {
       alert("Must agree to be contacted via email to submit form");
+    } else if (birth > todayDate) {
+      alert("Select a correct birth date");
     } else {
       axios
         .post(
@@ -70,7 +80,7 @@ export class ContactUs extends Component {
           }
         )
         .then((res) => {
-          console.log(res);
+          res.status(200);
         })
         .catch((err) => {
           if (err) {
