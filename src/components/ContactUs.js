@@ -42,9 +42,22 @@ export class ContactUs extends Component {
   }
 
   handleSubmit(e) {
-    console.log("clicked");
     e.preventDefault();
-    console.log(this.state);
+    const { name, email, birthDate, agreeTobeContacted } = this.state;
+    const letters = /^[a-zA-Z ]+$/;
+    const validEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (name.length === 0) {
+      alert("Please type your name");
+    } else if (!name.match(letters)) {
+      alert("Only use letters");
+    } else if (email.length === 0) {
+      alert("Please type your email");
+    } else if (!validEmail.test(email)) {
+      alert("Please type a correct email");
+    } else if (agreeTobeContacted === false) {
+      alert("Must agree to be contacted via email to submit form");
+    }
   }
 
   render() {
@@ -85,7 +98,7 @@ export class ContactUs extends Component {
             value={agreeTobeContacted}
             onChange={this.handleCheckBox}
           />
-          I agree to be contacted bia email.
+          I agree to be contacted via email.
           <input type="button" value="clear" onClick={this.handleClear}></input>
           <input type="submit" value="Submit" />
         </form>
