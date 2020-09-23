@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 export class ContactUs extends Component {
   constructor(props) {
@@ -59,7 +59,24 @@ export class ContactUs extends Component {
     } else if (agreeTobeContacted === false) {
       alert("Must agree to be contacted via email to submit form");
     } else {
-      axios.post()
+      axios
+        .post(
+          "https://my-json-server.typicode.com/JustUtahCoders/interview-users-api/users",
+          {
+            name: name,
+            email: email,
+            birthDate: birthDate,
+            emailConsent: agreeTobeContacted,
+          }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          if (err) {
+            console.log(err);
+          }
+        });
     }
   }
 
