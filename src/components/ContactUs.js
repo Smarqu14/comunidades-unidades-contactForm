@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
+import styled from "styled-components";
 
 export class ContactUs extends Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export class ContactUs extends Component {
       email: "",
       birthDate: "",
       agreeTobeContacted: false,
+      disable: true,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClear = this.handleClear.bind(this);
@@ -86,11 +88,12 @@ export class ContactUs extends Component {
   render() {
     const { name, email, birthDate, agreeTobeContacted } = this.state;
     return (
-      <Fragment>
+      <Wrapper>
+        <h2>Contact Form</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
             Name
-            <input
+            <Input
               type="text"
               name="name"
               value={name}
@@ -99,7 +102,7 @@ export class ContactUs extends Component {
           </label>
           <label>
             Email
-            <input
+            <Input
               type="email"
               name="email"
               value={email}
@@ -108,7 +111,7 @@ export class ContactUs extends Component {
           </label>
           <label>
             Birthdate
-            <input
+            <Input
               type="date"
               name="birthDate"
               value={birthDate}
@@ -122,12 +125,45 @@ export class ContactUs extends Component {
             onChange={this.handleCheckBox}
           />
           I agree to be contacted via email.
-          <input type="button" value="clear" onClick={this.handleClear}></input>
-          <input type="submit" value="Submit" />
+          <Buttons
+            type="button"
+            value="clear"
+            onClick={this.handleClear}
+          ></Buttons>
+          <Buttons type="submit" value="Submit" />
         </form>
-      </Fragment>
+      </Wrapper>
     );
   }
 }
 
 export default ContactUs;
+
+const Wrapper = styled.div`
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 25px;
+  border: 1px solid lightgrey;
+  margin: 25px;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+`;
+
+const Buttons = styled.input`
+  background-color: blue;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+`;
